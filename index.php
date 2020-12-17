@@ -1,3 +1,23 @@
+<?php
+
+spl_autoload_register(function($className) {
+  $directory = "classes" . DIRECTORY_SEPARATOR;
+  $fileExtension = ".php";
+  $fullPath = $directory . $className . $fileExtension;
+
+  require_once $fullPath; 
+});
+
+$sqlConn = new Connection("pizza_crud", "localhost", "root", "");
+$pizzaDAO = new PizzaDAO($sqlConn);
+$pizza = new Pizza("Muçarela", "Muçarela e tomate", "10,00");
+
+$pizzaDAO->create($pizza);
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
