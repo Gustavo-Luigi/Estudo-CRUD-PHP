@@ -9,7 +9,7 @@ class PizzaDAO {
   }
 
   public function create(Pizza $pizza) {
-    $sqlQuery = "INSERT INTO pizza_menu (flavor, ingredients, price) VALUES (:flavor, :ingredients, :price);";
+    $sqlQuery = "INSERT INTO pizza_menu (flavor, ingredients, price) VALUES (:flavor, :ingredients, :price)";
 
     $pstm = $this->conn->prepare($sqlQuery);
 
@@ -33,6 +33,13 @@ class PizzaDAO {
   }
 
   public function delete(Pizza $pizza) {
-    
+        $sqlQuery = "DELETE FROM pizza_menu WHERE flavor = :flavor";
+
+        $flavor = $pizza->getFlavor();
+
+        $pstm = $this->conn->prepare($sqlQuery);
+        $pstm->bindParam(":flavor", $flavor);
+
+        $pstm->execute();
   }
 }

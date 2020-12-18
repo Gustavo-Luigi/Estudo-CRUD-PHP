@@ -10,9 +10,11 @@ spl_autoload_register(function($className) {
 
 $sqlConn = new Connection("pizza_crud", "localhost", "root", "");
 $pizzaDAO = new PizzaDAO($sqlConn);
-$pizza = new Pizza("Muçarela", "Muçarela e tomate", "10,00");
+$pizza = new Pizza("Calabresa", "Calabresa e cebola", "15,00");
+$pizza2 = new Pizza("Muçarela", "Muçarela e tomate", "10,00");
 
-$pizzaDAO->create($pizza);
+
+
 
 
 
