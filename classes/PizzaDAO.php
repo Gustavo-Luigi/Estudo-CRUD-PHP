@@ -29,7 +29,19 @@ class PizzaDAO {
   }
 
   public function update(Pizza $pizza) {
+    $sqlQuery = "UPDATE pizza_menu SET ingredients = :ingredients, price = :price WHERE flavor = :flavor";
 
+    $pstm = $this->conn->prepare($sqlQuery);
+
+    $flavor = $pizza->getFlavor();
+    $ingredients = $pizza->getIngredients();
+    $price = $pizza->getPrice();
+    
+    $pstm->bindParam(":flavor", $flavor);
+    $pstm->bindParam(":ingredients", $ingredients);
+    $pstm->bindParam(":price", $price);
+
+    $pstm->execute();
   }
 
   public function delete(Pizza $pizza) {

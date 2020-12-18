@@ -14,8 +14,14 @@ $pizza = new Pizza("Calabresa", "Calabresa e cebola", "15,00");
 $pizza2 = new Pizza("Muçarela", "Muçarela e tomate", "10,00");
 
 
+$pizzaDAO->create($pizza);
+$pizzaDAO->create($pizza2);
 
+$pizza
+  ->setPrice("17,00")
+  ->setIngredients("Calabresa, muçarela e cebola");
 
+$pizzaDAO->update($pizza);
 
 
 ?>
