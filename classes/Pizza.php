@@ -5,13 +5,11 @@ class Pizza {
   private $flavor;
   private $ingredients;
   private $price;
-  private $id;
 
   public function __construct($flavor, $ingredients, $price) {
     $this->flavor = $flavor;
     $this->ingredients = $ingredients;
     $this->price = $price;
-    $this->id;
   }
 
 
@@ -71,26 +69,6 @@ class Pizza {
   public function setPrice($price)
   {
     $this->price = $price;
-
-    return $this;
-  }
-
-  /**
-   * Get the value of id
-   */ 
-  public function getId()
-  {
-    return $this->id;
-  }
-
-  /**
-   * Set the value of id
-   *
-   * @return  self
-   */ 
-  public function setId($id)
-  {
-    $this->id = $id;
 
     return $this;
   }
