@@ -25,7 +25,15 @@ class PizzaDAO {
   }
 
   public function read() {
+    $sqlQuery = "SELECT * FROM pizza_menu";
 
+    $pstm = $this->conn->prepare($sqlQuery);
+
+
+    $pstm->execute();
+
+    $results = $pstm->fetchAll();
+    return $results;
   }
 
   public function update(Pizza $pizza) {
