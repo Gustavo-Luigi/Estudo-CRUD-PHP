@@ -1,33 +1,3 @@
-<?php
-
-spl_autoload_register(function($className) {
-  $directory = "classes" . DIRECTORY_SEPARATOR;
-  $fileExtension = ".php";
-  $fullPath = $directory . $className . $fileExtension;
-
-  require_once $fullPath; 
-});
-
-$sqlConn = new Connection("pizza_crud", "localhost", "root", "");
-$pizzaDAO = new PizzaDAO($sqlConn);
-$pizza = new Pizza("Calabresa", "Calabresa e cebola", "15,00");
-$pizza2 = new Pizza("Muçarela", "Muçarela e tomate", "10,00");
-
-
-// $pizzaDAO->create($pizza);
-// $pizzaDAO->create($pizza2);
-
-// $pizza
-//   ->setPrice("17,00")
-//   ->setIngredients("Calabresa, muçarela e cebola");
-
-// $pizzaDAO->update($pizza);
-
-// $pizzas = $pizzaDAO->read();
-// var_dump($pizzas);
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,30 +17,30 @@ $pizza2 = new Pizza("Muçarela", "Muçarela e tomate", "10,00");
 
   <main class="mt-5">
     <section class="container shadow py-4 bg-light">
-      <form action="" method="POST">
+      <form method="POST">
 
         <div class="row">
           <div class="col-sm-8 mb-4">
             <label for="flavor">Pizza:</label>
             <br>
-            <input type="text" name="flavor" placeholder="Nome da pizza." class="w-100">
+            <input type="text" name="flavor" placeholder="Nome da pizza." id="flavor" class="w-100">
           </div>
 
           <div class="col-sm-4 mb-4">
             <label for="price">Preço:</label>
             <br>
-            <input type="text" name="price" placeholder="R$0,00" class="w-100">
+            <input type="text" name="price" placeholder="R$0,00" id="price" class="w-100">
           </div>
         </div>
         
         <div class="mb-4">
           <label for="ingredients">Ingredientes:</label>
           <br>
-          <textarea name="ingredients" rows="3" class="w-100" placeholder="Lista de ingredientes."></textarea>
+          <textarea name="ingredients" rows="3" class="w-100" placeholder="Lista de ingredientes." id="ingredients"></textarea>
         </div>
 
         <div class="d-flex justify-content-between">
-          <input type="submit" value="Cadastrar" class="btn btn-primary">
+          <input type="submit" name="pizzaRequest" value="Cadastrar" id="submitRequest" class="btn btn-primary submitRequest">
           <button class="btn btn-danger">Limpar</button>
         </div>
       </form>
@@ -123,5 +93,6 @@ $pizza2 = new Pizza("Muçarela", "Muçarela e tomate", "10,00");
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
