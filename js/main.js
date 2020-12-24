@@ -7,16 +7,33 @@ const form = {
 
 
 form.submitRequest.forEach((submitButton) => {
-  submitButton.addEventListener('click', (e) => {
+  submitButton.addEventListener('click', async (e) => {
     e.preventDefault();
     request = new XMLHttpRequest();
-  
+
     const requestData = `flavor=${form.flavor.value}&ingredients=${form.ingredients.value}&price=${form.price.value}&pizzaRequest=${submitButton.value}`;
     
     request.open('post', 'request_handler.php');
     request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
   
-    request.send(requestData);
+    await request.send(requestData);
+
+    getPizzas();
   });
 });
 
+function getPizzas() {
+  fetch("request_handler.php")
+    .then(response => {
+      return response.json();
+    }).then((data) => {
+      console.log(data);
+    })
+    .catch(e => {
+      console.log(e);
+    });
+}
+
+addEventListener("DOMContentLoaded", () => {
+  getPizzas();
+});

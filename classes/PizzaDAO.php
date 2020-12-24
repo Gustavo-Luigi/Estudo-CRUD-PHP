@@ -33,7 +33,14 @@ class PizzaDAO {
     $pstm->execute();
 
     $results = $pstm->fetchAll();
-    return $results;
+
+    $resultArray = array();
+    
+    foreach($results as $row) {
+      $resultArray[] = $row;
+    }
+
+    return $resultArray;
   }
 
   public function update(Pizza $pizza) {
