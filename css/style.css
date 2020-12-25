@@ -1,0 +1,50 @@
+#gz-btn-salvar {
+  display: none;
+}
+
+#gz-btn-excluir {
+  display: none;
+}
+
+.gz-edit-state #gz-btn-cadastro {
+  display: none;
+}
+
+.gz-edit-state #gz-btn-limpar {
+  display: none;
+}
+
+.gz-edit-state #gz-btn-salvar {
+  display: unset;
+}
+
+.gz-edit-state #gz-btn-excluir {
+  display: unset;
+}
+
+.gz-edit-icon {
+  cursor: pointer;
+}
+
+.gz-load {
+  display: block;
+  margin: auto;
+  width: 20%;
+  -webkit-animation: pizzaSpin 5s linear infinite;
+          animation: pizzaSpin 5s linear infinite;
+}
+
+@-webkit-keyframes pizzaSpin {
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes pizzaSpin {
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+/*# sourceMappingURL=style.css.map */

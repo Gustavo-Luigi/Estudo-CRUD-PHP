@@ -6,6 +6,8 @@
   <title>CRUD Pizza - PHP</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css">
+
 
 </head>
 <body>
@@ -17,33 +19,33 @@
 
   <main class="mt-5">
     <section class="container shadow py-4 bg-light">
-      <form method="POST">
+      <form method="POST" id="gz-form">
 
         <div class="row">
           <div class="col-sm-8 mb-4">
             <label for="flavor">Pizza:</label>
             <br>
-            <input type="text" name="flavor" placeholder="Nome da pizza." id="flavor" class="w-100">
+            <input type="text" name="flavor" placeholder="Nome da pizza." id="flavor" class="w-100 form-control">
           </div>
 
           <div class="col-sm-4 mb-4">
             <label for="price">Preço:</label>
             <br>
-            <input type="text" name="price" placeholder="R$0,00" id="price" class="w-100">
+            <input type="text" name="price" placeholder="R$0,00" id="price" class="w-100 form-control">
           </div>
         </div>
         
         <div class="mb-4">
           <label for="ingredients">Ingredientes:</label>
           <br>
-          <textarea name="ingredients" rows="3" class="w-100" placeholder="Lista de ingredientes." id="ingredients"></textarea>
+          <textarea name="ingredients" rows="3" class="w-100 form-control" placeholder="Lista de ingredientes." id="ingredients"></textarea>
         </div>
 
         <div class="d-flex justify-content-between">
-          <input type="submit" name="pizzaRequest" value="Cadastrar" id="submitRequest" class="btn btn-primary submitRequest">
-          <input type="submit" name="pizzaRequest" value="Salvar" id="submitRequest" class="btn btn-info submitRequest">
-          <input type="submit" name="pizzaRequest" value="Excluir" id="submitRequest" class="btn btn-danger submitRequest">
-          <button class="btn btn-danger">Limpar</button>
+          <input type="submit" name="pizzaRequest" value="Cadastrar" id="gz-btn-cadastro" class="btn btn-primary submitRequest">
+          <input type="submit" name="pizzaRequest" value="Salvar" id="gz-btn-salvar" class="btn btn-info submitRequest">
+          <input type="submit" name="pizzaRequest" value="Excluir" id="gz-btn-excluir" class="btn btn-danger submitRequest">
+          <button class="btn btn-danger" id="gz-btn-limpar">Limpar</button>
         </div>
       </form>
 
@@ -61,13 +63,14 @@
           </tr>
         </thead>
 
-        <tbody>
-          <tr>
+        <tbody id="gz-pizza-table-body">
+
+          <!-- <tr>
             <td>Muçarela</td>
             <td>Muçarela e tomate.</td>
             <td>R$: 10,00</td>
             <td>
-              <i class="text-primary"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+              <i class="text-primary gz-edit-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                 <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                 <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
               </svg></i>
@@ -78,12 +81,12 @@
             <td>Calabresa e cebola.</td>
             <td>R$: 15,00</td>
             <td>          
-              <i class="text-primary"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+              <i class="text-primary gz-edit-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
               <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
               <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
             </svg></i>
           </td>
-          </tr>
+          </tr> -->
         </tbody>
 
       </table>

@@ -1,0 +1,37 @@
+#gz-btn-salvar{
+    display: none;
+}
+#gz-btn-excluir{
+    display: none;
+}
+.gz-edit-state{
+    #gz-btn-cadastro {
+        display: none;
+    }
+    #gz-btn-limpar{
+        display: none;
+    }
+    #gz-btn-salvar{
+        display: unset;
+    }
+    #gz-btn-excluir{
+        display: unset;
+    }
+}
+
+.gz-edit-icon{
+    cursor: pointer;
+}
+
+.gz-load{
+    display: block;
+    margin: auto;
+    width: 20%;
+    animation: pizzaSpin 5s linear infinite;
+}
+
+@keyframes pizzaSpin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
