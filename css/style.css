@@ -1,24 +1,24 @@
-#gz-btn-salvar {
+.gz-edit-submit-btns {
   display: none;
 }
 
-#gz-btn-excluir {
+#gz-btn-cancel {
   display: none;
 }
 
-.gz-edit-state #gz-btn-cadastro {
+.gz-edit-state #gz-btn-register {
   display: none;
 }
 
-.gz-edit-state #gz-btn-limpar {
+.gz-edit-state #gz-btn-clear {
   display: none;
 }
 
-.gz-edit-state #gz-btn-salvar {
+.gz-edit-state .gz-edit-submit-btns {
   display: unset;
 }
 
-.gz-edit-state #gz-btn-excluir {
+.gz-edit-state #gz-btn-cancel {
   display: unset;
 }
 

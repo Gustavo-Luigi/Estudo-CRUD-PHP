@@ -3,7 +3,9 @@ const form = {
   flavor: document.getElementById("flavor"),
   ingredients: document.getElementById("ingredients"),
   price: document.getElementById("price"),
-  submitRequest: document.querySelectorAll(".submitRequest")
+  submitRequest: document.querySelectorAll(".submitRequest"),
+  clearBtn: document.getElementById("gz-btn-clear"),
+  cancelBtn: document.getElementById("gz-btn-cancel")
 }
 
 const pizzaTable = {
@@ -11,31 +13,37 @@ const pizzaTable = {
 }
 
 
-form.submitRequest.forEach((submitButton) => {
+form.submitRequest.forEach(submitButton => {
   submitButton.addEventListener('click', (e) => {
     e.preventDefault();
-    request = new XMLHttpRequest();
+    if(validateForm()) {
+      request = new XMLHttpRequest();
 
-    const requestData = `flavor=${form.flavor.value}&ingredients=${form.ingredients.value}&price=${form.price.value}&pizzaRequest=${submitButton.value}`;
-    
-      request.open('post', 'request_handler.php');
-      request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    
-      request.send(requestData);
+      const requestData = `flavor=${form.flavor.value}&ingredients=${form.ingredients.value}&price=${form.price.value}&pizzaRequest=${submitButton.value}`;
       
-      form.body.classList.remove("gz-edit-state");
-  
-      clearForm();
-      clearTable();
-      loadingTimer();
-      setTimeout(() => {
+        request.open('post', 'request_handler.php');
+        request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      
+        request.send(requestData);
+        
+        clearEditState();
+        
+        clearForm();
         clearTable();
-        getPizzas();
-      }, 500);
+        loadingTimer();
+        setTimeout(() => {
+          clearTable();
+          getPizzas();
+        }, 500);
+        focusFlavor();
+    } else {
+      clearForm();
       focusFlavor();
+      console.log("invalido");
+    }
+
   });
 });
-
 
 addEventListener("DOMContentLoaded", () => {
   clearForm();
@@ -43,26 +51,37 @@ addEventListener("DOMContentLoaded", () => {
   getPizzas();
 });
 
+form.clearBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  clearForm();
+  focusFlavor();
+});
 
+form.cancelBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  clearEditState();
+  focusFlavor();
+});
 
 function addEditListeners() {
   editIconArray = document.querySelectorAll(".gz-edit-icon");
   
-  editIconArray.forEach((editIcon) => {
-    editIcon.addEventListener('click', () => {
+  editIconArray.forEach(editIcon => {
+    editIcon.addEventListener("click", () => {
       focusPrice();
-      form.body.classList.add("gz-edit-state");
+      enterEditState();
       form.flavor.value = "teste";
     });
   });
 }
+
 
 async function getPizzas() {
   await fetch("request_handler.php")
     .then(response => {
       return response.json();
     })
-    .then((data) => {
+    .then(data => {
       console.log(data);
       displayPizzas(data);
       addEditListeners();
@@ -74,7 +93,7 @@ async function getPizzas() {
 
 function displayPizzas(pizzas) {
 
-  pizzas.forEach((pizza) => {
+  pizzas.forEach(pizza => {
     const newRow = document.createElement("tr");
 
     newRow.innerHTML = 
@@ -112,7 +131,7 @@ function loadingTimer() {
           <img class="gz-load" src="icons/pizza.svg" alt="Pizza girando">
         </td>
       </tr>
-    `
+    `;
 }
 
 function focusFlavor() {
@@ -121,4 +140,28 @@ function focusFlavor() {
 
 function focusPrice() {
   form.price.focus();
+}
+
+function validateForm() {
+
+  if(form.flavor.value == "") {
+    return false;
+  }
+  if(form.ingredients.value == "") {
+    form.ingredients.value = "Não informado";
+  }
+  if(form.price.value == "") {
+    form.price.value = "----";
+  } else if(isNaN(form.price.value)) {
+    return false;
+  }
+
+  return true;
+}
+
+function enterEditState() {
+  form.body.classList.add("gz-edit-state");
+}
+function clearEditState() {
+  form.body.classList.remove("gz-edit-state");
 }
