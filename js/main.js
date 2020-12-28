@@ -13,6 +13,7 @@ const pizzaTable = {
 }
 
 
+// Events
 form.submitRequest.forEach(submitButton => {
   submitButton.addEventListener('click', (e) => {
     e.preventDefault();
@@ -70,12 +71,23 @@ function addEditListeners() {
     editIcon.addEventListener("click", () => {
       focusPrice();
       enterEditState();
-      form.flavor.value = "teste";
+
+      const flavorText = editIcon.parentElement.parentElement.querySelector(".gz-flavor-text").textContent;
+      const ingredientText = editIcon.parentElement.parentElement.querySelector(".gz-ingredient-text").textContent;
+      const priceText = editIcon.parentElement.parentElement.querySelector(".gz-price-text").textContent.split(" ").pop();
+
+      form.flavor.value = flavorText;
+      form.ingredients.value = ingredientText;
+      form.price.value = priceText;
+
+      form.flavor.disabled = true;
+
     });
   });
 }
 
 
+// Functions
 async function getPizzas() {
   await fetch("request_handler.php")
     .then(response => {
@@ -98,9 +110,9 @@ function displayPizzas(pizzas) {
 
     newRow.innerHTML = 
       `
-        <td>${pizza.flavor}</td>
-        <td>${pizza.ingredients}</td>
-        <td>R$: ${pizza.price}</td>
+        <td class="gz-flavor-text">${pizza.flavor}</td>
+        <td class="gz-ingredient-text">${pizza.ingredients}</td>
+        <td class="gz-price-text">R$: ${pizza.price}</td>
         <td>
           <i class="text-primary gz-edit-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
             <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
@@ -164,4 +176,5 @@ function enterEditState() {
 }
 function clearEditState() {
   form.body.classList.remove("gz-edit-state");
+  form.flavor.disabled = false;
 }
