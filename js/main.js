@@ -18,29 +18,40 @@ form.submitRequest.forEach(submitButton => {
   submitButton.addEventListener('click', (e) => {
     e.preventDefault();
     if(validateForm()) {
-      request = new XMLHttpRequest();
 
-      const requestData = `flavor=${form.flavor.value}&ingredients=${form.ingredients.value}&price=${form.price.value}&pizzaRequest=${submitButton.value}`;
-      
-        request.open('post', 'request_handler.php');
-        request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-      
-        request.send(requestData);
+      try {
+        request = new XMLHttpRequest();
+
+        const requestData = `flavor=${form.flavor.value}&ingredients=${form.ingredients.value}&price=${form.price.value}&pizzaRequest=${submitButton.value}`;
         
-        clearEditState();
+          request.open('post', 'request_handler.php');
+          request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         
-        clearForm();
-        clearTable();
-        loadingTimer();
-        setTimeout(() => {
+          request.send(requestData);
+          
+          clearEditState();
+          
+          clearForm();
           clearTable();
-          getPizzas();
-        }, 500);
+          loadingTimer();
+          setTimeout(() => {
+            clearTable();
+            getPizzas();
+          }, 500);
+          displayAlert(true, true);
+          focusFlavor();
+
+      } catch (e) {
+        clearEditState();
+        clearForm();
+        displayAlert(false, true);
         focusFlavor();
+      }
+
     } else {
       clearForm();
+      displayAlert(false, false);
       focusFlavor();
-      console.log("invalido");
     }
 
   });
@@ -61,6 +72,7 @@ form.clearBtn.addEventListener("click", (e) => {
 form.cancelBtn.addEventListener("click", (e) => {
   e.preventDefault();
   clearEditState();
+  clearForm();
   focusFlavor();
 });
 
@@ -177,4 +189,32 @@ function enterEditState() {
 function clearEditState() {
   form.body.classList.remove("gz-edit-state");
   form.flavor.disabled = false;
+}
+
+function displayAlert(successful, validForm) {
+
+  const alertBox = document.getElementById("gz-alert-section");
+  let msg;
+
+  if(!validForm) {
+    alert = "danger";
+    msg = "Dados inválidos, preencha o formulário corretamente";
+  } else if(successful) {
+    alert = "success";
+    msg = `Operação bem sucedida!`; 
+  } else {
+    alert = "danger";
+    msg = `Operação falhou!`;
+  }
+  
+  alertBox.innerHTML = 
+    `
+    <div class="alert alert-${alert} my-5 p-4">
+    <p class="mb-0">${msg}</p>
+    </div>
+    `;
+
+    setTimeout(() => {
+      alertBox.innerHTML = "";
+    }, 3000);
 }
