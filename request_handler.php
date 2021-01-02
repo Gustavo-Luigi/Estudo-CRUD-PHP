@@ -12,9 +12,9 @@ $sqlConn = new Connection("pizza_crud", "localhost", "root", "");
 $pizzaDAO = new PizzaDAO($sqlConn);
 
 if(isset($_POST["flavor"])) {
-  $flavor = $_POST["flavor"];
-  $ingredients = $_POST["ingredients"];
-  $price = $_POST["price"];
+  $flavor = strip_tags($_POST["flavor"]);
+  $ingredients = strip_tags($_POST["ingredients"]);
+  $price = strip_tags($_POST["price"]);
   $requestType = $_POST["pizzaRequest"];
   
   

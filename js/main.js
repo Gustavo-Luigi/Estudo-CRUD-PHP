@@ -17,7 +17,7 @@ const pizzaTable = {
 form.submitRequest.forEach(submitButton => {
   submitButton.addEventListener('click', (e) => {
     e.preventDefault();
-    if(validateForm()) {
+    if(validateForm(submitButton.value)) {
 
       try {
         request = new XMLHttpRequest();
@@ -166,9 +166,10 @@ function focusPrice() {
   form.price.focus();
 }
 
-function validateForm() {
+function validateForm(submitType) {
 
-  if(!form.submitRequest.value == "Excluir"){
+  if(submitType != "Excluir") {
+    console.log("entrou no if");
     if(form.flavor.value == "") {
       return false;
     }
@@ -181,7 +182,7 @@ function validateForm() {
       return false;
     }
   }
- 
+  console.log("Vai dar true");
   return true;
 }
 
