@@ -106,7 +106,6 @@ async function getPizzas() {
       return response.json();
     })
     .then(data => {
-      console.log(data);
       displayPizzas(data);
       addEditListeners();
     })
@@ -169,7 +168,6 @@ function focusPrice() {
 function validateForm(submitType) {
 
   if(submitType != "Excluir") {
-    console.log("entrou no if");
     if(form.flavor.value == "") {
       return false;
     }
@@ -182,7 +180,7 @@ function validateForm(submitType) {
       return false;
     }
   }
-  console.log("Vai dar true");
+
   return true;
 }
 
