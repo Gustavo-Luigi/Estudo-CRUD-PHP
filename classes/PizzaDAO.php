@@ -13,9 +13,9 @@ class PizzaDAO {
 
     $pstm = $this->conn->prepare($sqlQuery);
 
-    $flavor = $pizza->getFlavor();
-    $ingredients = $pizza->getIngredients();
-    $price = $pizza->getPrice();
+    $flavor = strip_tags($pizza->getFlavor());
+    $ingredients = strip_tags($pizza->getIngredients());
+    $price = strip_tags($pizza->getPrice());
     
     $pstm->bindParam(":flavor", $flavor);
     $pstm->bindParam(":ingredients", $ingredients);

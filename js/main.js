@@ -168,18 +168,20 @@ function focusPrice() {
 
 function validateForm() {
 
-  if(form.flavor.value == "") {
-    return false;
+  if(!form.submitRequest.value == "Excluir"){
+    if(form.flavor.value == "") {
+      return false;
+    }
+    if(form.ingredients.value == "") {
+      form.ingredients.value = "Não informado";
+    }
+    if(form.price.value == "" || form.price.value == "----") {
+      form.price.value = "----";
+    } else if(isNaN(form.price.value)) {
+      return false;
+    }
   }
-  if(form.ingredients.value == "") {
-    form.ingredients.value = "Não informado";
-  }
-  if(form.price.value == "") {
-    form.price.value = "----";
-  } else if(isNaN(form.price.value)) {
-    return false;
-  }
-
+ 
   return true;
 }
 
